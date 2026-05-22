@@ -1,13 +1,13 @@
-# Last Ante
-> *The house always wins. But your family can't afford for you to lose.*
+# Broken House
+> *The house allegedly always wins. However your family can't afford for you to lose.*
 
 ---
 
 ## Overview
 
-**Last Ante** is a text-based CLI survival game built in C# where every decision carries weight. You play as a provider — someone whose family depends entirely on you to keep the lights on, the medicine stocked, and the table full. Your only means of income? The gambling table.
+**Broken House** is a text-based CLI survival game built in C# where every decision carries weight. You play as a father and the provider — someone whose family depends entirely on you to keep the lights on, the medicine stocked, and the table full. Your only means of income? The gambling table.
 
-Win big and your family lives comfortably. Lose it all and watch them slowly fall apart.
+Win big and your family lives comfortably. **Lose it all and watch them slowly fall apart**.
 
 ---
 
@@ -15,8 +15,8 @@ Win big and your family lives comfortably. Lose it all and watch them slowly fal
 
 The game is split into two phases that repeat each in-game day:
 
-### 🃏 The Table — Gambling Phase
-Head to the gambling table to earn money for the day. You choose how much to wager and which games to play. Luck and risk management are everything here. Walk away with enough and your family survives another night. Walk away with nothing and the consequences start stacking up.
+### 🃏 The Casino — Gambling Phase
+Head to the casino as your job doesn't pay enough, to earn money for the day. You choose how much to wager and which games to play. Luck and risk management are everything here. Walk away with enough and your family survives another night. Walk away with nothing and the consequences start stacking up.
 
 - Manage your wager carefully — going all-in is tempting but dangerous
 - Different games carry different odds and risk levels
@@ -27,7 +27,7 @@ At the end of each day, you must tend to your family's needs. Basic survival cos
 
 Resources you must manage:
 - **Food** — your family needs to eat every day. Miss enough meals and they begin to starve.
-- **Medicine** — family members can fall ill at random. Without medicine, sickness worsens and can turn fatal.
+- **Medicine** — family members can fall ill at random. Without medicine, sickness worsens and can turn fatal...
 - **Heat** — especially in colder seasons, heating the home is non-negotiable for health.
 - **Other expenses** — unexpected costs can surface and demand your attention.
 
@@ -70,7 +70,7 @@ The game ends when your family is gone — or if you somehow manage to secure en
 ## Built With
 
 - **Language:** C#
-- **Platform:** Visual Studio / .NET Console Application
+- **Platform:** Visual Studio 
 - **Interface:** CLI (Command Line Interface)
 
 ---
