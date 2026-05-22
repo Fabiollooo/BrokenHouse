@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Text;
 
 namespace BrokenHouse
 {
-    public class Game
+    public class Home
     {
-        public void ChooseGame(Player player)
+        public void ChooseHomeOption(Player player)
         {
             Program.DisplayPlayerInfo(player);
 
             Console.WriteLine("Choose a game to play: ");
-            Console.WriteLine("1 - Blackjack ");
-            Console.WriteLine("2 - Roulette");
-            Console.WriteLine("3 - Craps");
-            Console.WriteLine("4 - Higher or Lower");
-            Console.WriteLine("0 - Go Back");
+            Console.WriteLine("1 - Check Family Status");
+            Console.WriteLine("2 - Check Expenses to pay");
+            Console.WriteLine("3 - Go to sleep");
+            Console.WriteLine("0 - Exit the house");
             Console.WriteLine("\n");
-            //Add more games later maybe
-
+            
 
             Console.ForegroundColor = ConsoleColor.Black;
             int choice = int.Parse(Console.ReadLine());
@@ -27,26 +24,21 @@ namespace BrokenHouse
             switch (choice)
             {
                 case 1:
-                    Console.WriteLine("Blackjack it is...");
+                    Console.WriteLine("Check up on your family");
                     break;
 
                 case 2:
-                    Console.WriteLine("Roulette it is...");
-                    
+                    Console.WriteLine("Checking expenses");
+                    //Display all expenses that are past/due.
                     break;
 
                 case 3:
-                    Console.WriteLine("Craps it is...");
-
-                    break;
-
-                case 4:
-                    Console.WriteLine("Higer or Lower it is...");
-
+                    Console.WriteLine("Take a rest");
+                    //Progesses to the next day, and adds the daily income to the player's balance.
                     break;
 
                 case 0:
-                    Console.WriteLine("Exiting the casino.");
+                    Console.WriteLine("Exiting home.");
                     ClearDisplay();
                     return;
 
@@ -54,7 +46,8 @@ namespace BrokenHouse
                     Console.WriteLine("Invalid input");
                     break;
             }
-        }//end of ChooseGame
+
+        }//end of HomeOption
 
         static void ClearDisplay()
         {

@@ -1,4 +1,6 @@
-﻿namespace BrokenHouse
+﻿using System.Numerics;
+
+namespace BrokenHouse
 {
     internal class Program
     {
@@ -7,40 +9,43 @@
             
             Console.WriteLine("Enter your characters name:");
             string CharacterName = Console.ReadLine();
-            //Console.WriteLine("Welcome " + CharacterName + " !");
             ClearDisplay();
-            
-
+           
 
                                        // name, balance, current day, daily income
             Player player = new Player(CharacterName, 0.0, 1, 200.00);
             Family family = new Family();
             Game game = new Game();
+            Home home = new Home();
 
-
-            Console.WriteLine($"Name: { player.Name},  Balance: { player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
-            Console.WriteLine("\n******************\n");
 
             while (true)
             {
+                //Display Player Important Info
+                DisplayPlayerInfo(player);
 
-            
+
                 Console.WriteLine("Choose an option: ");
                 Console.WriteLine("1 - Go to the Casino");
                 Console.WriteLine("2 - Go Home");
                 Console.WriteLine("\n");
 
+                Console.ForegroundColor = ConsoleColor.Black;
                 int choice = int.Parse(Console.ReadLine());
+                Console.ResetColor();
                 switch(choice)
                 {
                     case 1:
-                        Console.WriteLine("You're walking to the casino...");
-                        game.ChooseGame();
+                        ClearDisplay();
+                        TypewriterEffect("You're walking to the casino...", 40);
+                        game.ChooseGame(player);
                         break;
 
                     case 2:
-                        Console.WriteLine("You're going Home...");
+                        TypewriterEffect("You're walking Home...", 40);
                         DisplayFamilyGreeting(family);
+                        home.ChooseHomeOption(player);
+
                         break;
 
                     default:
@@ -56,9 +61,11 @@
 
         static void DisplayFamilyGreeting(Family family)
         {
-            TypewriterEffect($"Your Wife {family.Members[0].Name} welcomes you home.", 50);
-            TypewriterEffect($"Suddenly your daughter {family.Members[1].Name} runs out of her room and also welcomes you back !", 50);
-            
+            TypewriterEffect($"Your Wife {family.Members[0].Name} welcomes you home.", 20);
+            TypewriterEffect($"Suddenly your daughter {family.Members[1].Name} runs out of her room and also welcomes you back !", 20);
+            System.Threading.Thread.Sleep(2000);
+            ClearDisplay();
+
         }
 
         //Type writer effect for text display
@@ -70,6 +77,18 @@
                 System.Threading.Thread.Sleep(delayMs);
             }
             Console.WriteLine();
+        }
+
+        public static void DisplayPlayerInfo(Player player)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("******************\n");
+            Console.ResetColor();
+                Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
+            Console.ForegroundColor= ConsoleColor.DarkBlue;
+            Console.WriteLine("\n******************\n");
+            Console.ResetColor();
+
         }
 
         static void ClearDisplay() 
