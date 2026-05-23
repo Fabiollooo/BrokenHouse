@@ -22,8 +22,8 @@ namespace BrokenHouse
             this.Heating = 0;
 
             Members = new List<FamilyMember>();
-            Members.Add(new FamilyMember("Spouse", "Joanna", 32, true, false));
-            Members.Add(new FamilyMember("Daughter", "Eve", 6, true, false));
+            Members.Add(new FamilyMember("Wife", "Joanna", 50, 32, true, false));
+            Members.Add(new FamilyMember("Daughter", "Eve", 50, 6, true, false));
         }
 
     }

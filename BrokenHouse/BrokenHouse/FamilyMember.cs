@@ -9,14 +9,17 @@ namespace BrokenHouse
         public string MemberType { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
+        
+        public int Hunger { get; set; }
         public bool IsAlive { get; set; }
         public bool IsSick { get; set; }
 
 
-        public FamilyMember(string memberType, string name, int age, bool isAlive, bool isSick)
+        public FamilyMember(string memberType, string name, int hunger,  int age, bool isAlive, bool isSick)
         {
             this.MemberType = memberType;
             this.Name = name;
+            this.Hunger = hunger;
             this.Age = age;
             this.IsAlive = true;
             this.IsSick = false;

@@ -6,10 +6,9 @@ namespace BrokenHouse
     {
         static void Main(string[] args)
         {
-            
+            Console.ResetColor();
             Console.WriteLine("Enter your characters name:");
             string CharacterName = Console.ReadLine();
-            ClearDisplay();
            
 
                                        // name, balance, current day, daily income
@@ -19,10 +18,12 @@ namespace BrokenHouse
             Home home = new Home();
 
 
+            ClearDisplay(player);
+            
             while (true)
             {
                 //Display Player Important Info
-                DisplayPlayerInfo(player);
+                //DisplayPlayerInfo(player);
 
 
                 Console.WriteLine("Choose an option: ");
@@ -36,15 +37,15 @@ namespace BrokenHouse
                 switch(choice)
                 {
                     case 1:
-                        ClearDisplay();
+                        ClearDisplay(player);
                         TypewriterEffect("You're walking to the casino...", 40);
                         game.ChooseGame(player);
                         break;
 
                     case 2:
                         TypewriterEffect("You're walking Home...", 40);
-                        DisplayFamilyGreeting(family);
-                        home.ChooseHomeOption(player);
+                        DisplayFamilyGreeting(family, player);
+                        home.ChooseHomeOption(player, family);
 
                         break;
 
@@ -59,12 +60,12 @@ namespace BrokenHouse
         }// End of Main method
 
 
-        static void DisplayFamilyGreeting(Family family)
+        static void DisplayFamilyGreeting(Family family,  Player player)
         {
             TypewriterEffect($"Your Wife {family.Members[0].Name} welcomes you home.", 20);
             TypewriterEffect($"Suddenly your daughter {family.Members[1].Name} runs out of her room and also welcomes you back !", 20);
             System.Threading.Thread.Sleep(2000);
-            ClearDisplay();
+            ClearDisplay(player);
 
         }
 
@@ -82,18 +83,19 @@ namespace BrokenHouse
         public static void DisplayPlayerInfo(Player player)
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("******************\n");
+            Console.WriteLine("************************************\n");
             Console.ResetColor();
                 Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
             Console.ForegroundColor= ConsoleColor.DarkBlue;
-            Console.WriteLine("\n******************\n");
+            Console.WriteLine("\n************************************\n");
             Console.ResetColor();
 
         }
 
-        static void ClearDisplay() 
+        static void ClearDisplay(Player player) 
         {
             Console.Clear();
+            DisplayPlayerInfo(player);
         }
 
     }

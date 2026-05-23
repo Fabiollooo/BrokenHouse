@@ -9,7 +9,7 @@ namespace BrokenHouse
     {
         public void ChooseGame(Player player)
         {
-            Program.DisplayPlayerInfo(player);
+            //Program.DisplayPlayerInfo(player);
 
             Console.WriteLine("Choose a game to play: ");
             Console.WriteLine("1 - Blackjack ");
@@ -47,7 +47,7 @@ namespace BrokenHouse
 
                 case 0:
                     Console.WriteLine("Exiting the casino.");
-                    ClearDisplay();
+                    ClearDisplay(player);
                     return;
 
                 default:
@@ -56,9 +56,10 @@ namespace BrokenHouse
             }
         }//end of ChooseGame
 
-        static void ClearDisplay()
+        static void ClearDisplay(Player player)
         {
             Console.Clear();
+            Program.DisplayPlayerInfo(player);
         }
     }
 }
