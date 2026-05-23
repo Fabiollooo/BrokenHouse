@@ -85,16 +85,5 @@ namespace BrokenHouse
             Console.WriteLine();
         }
 
-        public static void DisplayPlayerInfo(Player player)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("******************\n");
-            Console.ResetColor();
-            Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("\n******************\n");
-            Console.ResetColor();
-
-        }
     }
 }
