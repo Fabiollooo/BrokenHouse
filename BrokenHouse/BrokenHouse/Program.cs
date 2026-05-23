@@ -29,6 +29,7 @@ namespace BrokenHouse
                 Console.WriteLine("Choose an option: ");
                 Console.WriteLine("1 - Go to the Casino");
                 Console.WriteLine("2 - Go Home");
+                Console.WriteLine("3 - Restart game");
                 Console.WriteLine("\n");
 
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -46,7 +47,11 @@ namespace BrokenHouse
                         TypewriterEffect("You're walking Home...", 40);
                         DisplayFamilyGreeting(family, player);
                         home.ChooseHomeOption(player, family);
+                        break;
 
+                    case 3:
+                        TypewriterEffect("Restarting game", 40);
+                        //Restart game to default, overwrite the previous character
                         break;
 
                     default:
