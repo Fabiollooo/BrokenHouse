@@ -22,10 +22,6 @@ namespace BrokenHouse
             
             while (true)
             {
-                //Display Player Important Info
-                //DisplayPlayerInfo(player);
-
-
                 Console.WriteLine("Choose an option: ");
                 Console.WriteLine("1 - Go to the Casino");
                 Console.WriteLine("2 - Go Home");
@@ -39,12 +35,12 @@ namespace BrokenHouse
                 {
                     case 1:
                         ClearDisplay(player);
-                        TypewriterEffect("You're walking to the casino...", 40);
+                        TypewriterEffect("You're walking to the casino...", 20);
                         game.ChooseGame(player);
                         break;
 
                     case 2:
-                        TypewriterEffect("You're walking Home...", 40);
+                        TypewriterEffect("You're walking Home...", 20);
                         DisplayFamilyGreeting(family, player);
                         home.ChooseHomeOption(player, family);
                         break;
@@ -74,7 +70,6 @@ namespace BrokenHouse
 
         }
 
-        //Type writer effect for text display
         static void TypewriterEffect(string text, int delayMs = 50)
         {
             foreach (char c in text)
@@ -88,11 +83,11 @@ namespace BrokenHouse
         public static void DisplayPlayerInfo(Player player)
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("************************************\n");
-            Console.ResetColor();
-                Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
-            Console.ForegroundColor= ConsoleColor.DarkBlue;
-            Console.WriteLine("\n************************************\n");
+                Console.WriteLine("************************************\n");
+                Console.ResetColor();
+                    Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
+                Console.ForegroundColor= ConsoleColor.DarkBlue;
+                Console.WriteLine("\n************************************\n");
             Console.ResetColor();
 
         }

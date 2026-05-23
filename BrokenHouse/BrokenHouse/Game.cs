@@ -11,13 +11,23 @@ namespace BrokenHouse
         {
             //Program.DisplayPlayerInfo(player);
 
-            Console.WriteLine("Choose a game to play: ");
-            Console.WriteLine("1 - Blackjack ");
-            Console.WriteLine("2 - Roulette");
-            Console.WriteLine("3 - Craps");
-            Console.WriteLine("4 - Higher or Lower");
-            Console.WriteLine("0 - Go Back");
-            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n╔════════════════════════════════╗");
+            Console.WriteLine("║     CHOOSE A GAME TO PLAY      ║");
+            Console.WriteLine("╚════════════════════════════════╝\n");
+            Console.ResetColor();
+            
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("  1 - Blackjack ");
+            Console.WriteLine("  2 - Roulette ");
+            Console.WriteLine("  3 - Craps ");
+            Console.WriteLine("  4 - Higher or Lower ");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("  0 - Go Back");
+            Console.ResetColor();
+            Console.WriteLine();
             //Add more games later maybe
 
 
@@ -28,6 +38,7 @@ namespace BrokenHouse
             {
                 case 1:
                     Console.WriteLine("Blackjack it is...");
+                    ClearDisplay(player);
                     PlayBlackjack(player);
                     break;
 
@@ -61,9 +72,12 @@ namespace BrokenHouse
 
         static void PlayBlackjack(Player player)
         {
-            Console.WriteLine("^^^^^^^^^^^^^^^^^^^^^");
-            Console.WriteLine("Welcome to Blackjack!");
-            // Implement Blackjack game logic here
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n╔═══════════════════════════════════╗");
+            Console.WriteLine("║    WELCOME TO BLACKJACK           ║");
+            Console.WriteLine("╚═══════════════════════════════════╝\n");
+            Console.ResetColor();
+            
 
             int playerBet = 0;
             int playerCard1 = 0;
@@ -77,42 +91,66 @@ namespace BrokenHouse
             bool playerPlays = true;
             while (playerPlays)
             {
-                Console.WriteLine("New game has begun !\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n>>> New Round Started <<<\n");
+                Console.ResetColor();
+
                 Random rand = new Random();
                 //Player hand
                     playerCard1 = rand.Next(1, 11);
                     playerCard2 = rand.Next(1, 11);
                     sumPlayerCards = playerCard1 + playerCard2;
-                TypewriterEffect($"{player.Name}'s Card 1: {playerCard1} & Card 2: {playerCard2} || {sumPlayerCards}", 10);
-                Console.WriteLine("\n");
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    TypewriterEffect($"┌─ {player.Name}'s Hand ─┐", 5);
+                    Console.ResetColor();
+                    TypewriterEffect($"   Card 1: {playerCard1}  |   Card 2: {playerCard2}", 10);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    TypewriterEffect($"  Total: {sumPlayerCards}", 10);
+                    Console.ResetColor();
+                    Console.WriteLine();
 
                 //Dealer hand
                     dealerCard1 = rand.Next(1, 11);
                     dealerCard2 = rand.Next(1, 11);
                     sumDealerCards = dealerCard1 + dealerCard2;
-                    TypewriterEffect($"Dealer's Card 1: {dealerCard1} & Dealer's Card 2: ... ", 10);
+
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    TypewriterEffect($"┌─ Dealer's Hand ─┐", 5);
+                    Console.ResetColor();
+                    TypewriterEffect($"   Card 1: {dealerCard1}  |   Card 2: [Hidden]", 10);
 
 
 
                 ////////////////////////////////////////////////////////////////////////////////////////
                 //Player Hit or Stand
-                //Fix hitting logic, currently only give the opportunity to hit once, need to allow player to hit multiple times until they choose to stand or bust
-                //Also fix the dealer logic, currently the dealer does not hit at all, need to implement logic for dealer to hit until they reach 17 or higher
 
-
-                Console.WriteLine("\n");
+                Console.WriteLine();
                 bool PlayerHits = true;
 
                 while (PlayerHits == true)
                 {
-                    Console.WriteLine("Hit (h) or Stand (s)");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("─────────────────────────────────");
+                    Console.ResetColor();
+                    Console.Write("> Hit (h) or Stand (s)? ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("> ");
+                    Console.ResetColor();
                     string playerTurnChoice = Console.ReadLine();
 
                     //Player hits 
                     if (playerTurnChoice == "h" || playerTurnChoice == "H")
                     {
-                        sumPlayerCards += rand.Next(1, 11);
-                        TypewriterEffect($"Total: {sumPlayerCards}", 10);
+                        int newCard = rand.Next(1, 11);
+                        sumPlayerCards += newCard;
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        TypewriterEffect($" You drew a {newCard}!", 10);
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        TypewriterEffect($" New Total: {sumPlayerCards}", 10);
+                        Console.ResetColor();
+
                         if(sumPlayerCards > 21)
                         {
                             CheckBlackjackbust(sumPlayerCards, sumDealerCards, roundOver);
@@ -128,6 +166,15 @@ namespace BrokenHouse
                     else if (playerTurnChoice == "s" || playerTurnChoice == "S")
                     {
                         PlayerHits = false;
+                        if(sumDealerCards <= 17)
+                        {
+                            while (sumDealerCards <= 17)
+                            {
+                                sumDealerCards += rand.Next(1, 11);
+                            }
+                        }
+
+
                         TypewriterEffect("\nPlayer stands.", 10);
                         TypewriterEffect("Dealer is checking cards...", 30);
                         System.Threading.Thread.Sleep(2000);
@@ -142,14 +189,14 @@ namespace BrokenHouse
 
                 ////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-                
-
-
-               
-                Console.WriteLine("\nWould you like to play again (Y/N) ?");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("═══════════════════════════════════");
+                Console.ResetColor();
+                Console.Write("Would you like to play again? (y/n) ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write("> ");
+                Console.ResetColor();
                 string playerContinue = Console.ReadLine();
                 if(playerContinue == "n" || playerContinue == "N")
                 {
@@ -162,20 +209,17 @@ namespace BrokenHouse
                     playerPlays = false;
                     ClearDisplay(player);
                     PlayBlackjack(player);
-
                 }
-
-                
-
             }
-
-
-
 
         }//End of PlayBlackjack
 
         static void CheckBlackjackbust(int sumPlayerCards,int sumDealerCards, bool roundOver)
         {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("═══════════════════════════════════");
+            Console.ResetColor();
             //Bust Checker
             if (roundOver == false)
             {
@@ -183,34 +227,34 @@ namespace BrokenHouse
                 if (sumPlayerCards > 21)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nPlayer busts! Dealer wins.");
+                    TypewriterEffect("\nPlayer busts! Dealer wins.");
                     Console.ResetColor();
                     roundOver = true;
                 }
                 else if (sumPlayerCards == 21 && sumPlayerCards > sumDealerCards)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\nPlayer hit blackjack! Dealer wins.");
+                    TypewriterEffect("\nPlayer hit blackjack! Dealer wins.", 30);
                     Console.ResetColor();
                 }
                 else if (sumDealerCards > 21)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\nDealer busts! Player wins.");
+                    TypewriterEffect("\nDealer busts! Player wins.", 30);
                     Console.ResetColor();
                     roundOver = true;
                 }
                 else if (sumPlayerCards > sumDealerCards)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\nPlayer wins!");
+                    TypewriterEffect("\nPlayer wins!", 30);
                     Console.ResetColor();
                     roundOver = true;
                 }
                 else if (sumDealerCards > sumPlayerCards)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nDealer wins!");
+                    TypewriterEffect("\nDealer wins!", 30);
                     Console.ResetColor();
                     roundOver = true;
                 }
@@ -220,14 +264,14 @@ namespace BrokenHouse
                     roundOver = true;
                 }
 
-                Console.WriteLine($"Player Hand: {sumPlayerCards}");
-                Console.WriteLine($"Dealer Hand: {sumDealerCards}");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($" Your Hand:  {sumPlayerCards}");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine($" Dealer Hand: {sumDealerCards}");
+                Console.ResetColor();
             }
         }
-
-
-
-
 
 
         static void ClearDisplay(Player player)
