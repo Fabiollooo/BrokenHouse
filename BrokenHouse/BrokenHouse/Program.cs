@@ -14,13 +14,15 @@ namespace BrokenHouse
             player = CharacterCreation(saveSystem);
 
             // name, balance, current day, daily income
-            //Player player = new Player(CharacterName, 0.0, 1, 200.00);
+            
             Family family = new Family();
             Game game = new Game();
             Home home = new Home();
+            //Items items = new Items();
+
 
             //ClearDisplay(player);
-            
+
             while (true)
             {
                 Console.WriteLine("Choose an option: ");
@@ -153,11 +155,11 @@ namespace BrokenHouse
         public static void DisplayPlayerInfo(Player player)
         {
             Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("************************************\n");
+                Console.WriteLine("***************************************************************\n");
                 Console.ResetColor();
                     Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
                 Console.ForegroundColor= ConsoleColor.White;
-                Console.WriteLine("\n************************************\n");
+                Console.WriteLine("\n***************************************************************\n");
             Console.ResetColor();
 
         }

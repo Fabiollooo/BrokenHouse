@@ -15,3 +15,4 @@ Ideas to add to the game:
 - Could upgrade houses if you can afford to, but the more expensive the house the more expensive the bills and family needs. 
 	-You start off in a cold, broken down comunist era apartment with poor living conditions however the rent is barely affordable, but as you upgrade to better houses the rent and bills will increase, but so will the quality of life for your family.	
 -Every once so often some event could occur e.g A scetchy man can approach you and give you an opportunity to flip a coin, you win you double your money, you lose you lose all your money, but this rarely occurs.
+-Add achievements ??
