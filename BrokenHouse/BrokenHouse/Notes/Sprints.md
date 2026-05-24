@@ -1,12 +1,12 @@
 ✅ Sprint 0 — Project Setup
 
-Get the basics in place before writing any game logic.
+Get the basics in place before writing any game logic. (DONE)
  -Create a new C# Console App project in Visual Studio
  -Name the solution BrokenHouse
  -Set up GitHub repo with a Visual Studio .gitignore
  -Push your empty project to GitHub
  -Add README.md to the repo
- -Test that the app runs and prints "Hello, World!" — then delete it
+ 
 
 
 ✅ Sprint 1 — Core Game Loop

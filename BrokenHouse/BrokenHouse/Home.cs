@@ -41,6 +41,7 @@ namespace BrokenHouse
                             break;
 
                         case 3:
+                            SleepProceedDay(player, family);
                             ClearDisplay(player);
                             Console.WriteLine("Take a rest");
                             //Progesses to the next day, and adds the daily income to the player's balance.
@@ -85,5 +86,13 @@ namespace BrokenHouse
             Console.WriteLine();
         }
 
-    }
+        static void SleepProceedDay(Player player, Family family)
+        {
+            TypewriterEffect("Going to sleep...", 30);
+            player.CurrentDay += 1;
+        }
+
+
+
+    }//end of Home class
 }

@@ -1,4 +1,6 @@
 ﻿using System.Numerics;
+using System.IO;
+using System.Text.Json;
 
 namespace BrokenHouse
 {
@@ -6,17 +8,35 @@ namespace BrokenHouse
     {
         static void Main(string[] args)
         {
-            Console.ResetColor();
-            Console.WriteLine("Enter your characters name:");
-            string CharacterName = Console.ReadLine();
-           
+            string CharacterName;
+            Player player;
+            ReadToFile saveSystem = new ReadToFile();
 
+
+            string filePath = @".\saves\save.json";
+            if (File.Exists(filePath) && new FileInfo(filePath).Length > 0)
+            {
+                Console.WriteLine("Character found !");
+                TypewriterEffect("Loading character...\n\n", 20);
+                System.Threading.Thread.Sleep(1000);
+                player = saveSystem.LoadPlayer();
+                CharacterName = player.Name;
+            }
+            else
+            {
+                Console.ResetColor();
+                Console.WriteLine("Enter your characters name:");
+                CharacterName = Console.ReadLine();
+                player = new Player(CharacterName, 0.0, 1, 200.00);
+                saveSystem.WriteToFile(player);
+                System.Threading.Thread.Sleep(2000);
+
+            }
                                        // name, balance, current day, daily income
-            Player player = new Player(CharacterName, 0.0, 1, 200.00);
+            //Player player = new Player(CharacterName, 0.0, 1, 200.00);
             Family family = new Family();
             Game game = new Game();
             Home home = new Home();
-
 
             ClearDisplay(player);
             
@@ -25,7 +45,8 @@ namespace BrokenHouse
                 Console.WriteLine("Choose an option: ");
                 Console.WriteLine("1 - Go to the Casino");
                 Console.WriteLine("2 - Go Home");
-                Console.WriteLine("3 - Restart game");
+                Console.WriteLine("3 - Save game");
+                Console.WriteLine("4 - Restart game");
                 Console.WriteLine("\n");
 
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -46,6 +67,11 @@ namespace BrokenHouse
                         break;
 
                     case 3:
+                        TypewriterEffect("Saving game...", 20);
+                        saveSystem.WriteToFile(player);
+                        break;
+
+                    case 4:
                         TypewriterEffect("Restarting game", 40);
                         //Restart game to default, overwrite the previous character
                         break;
