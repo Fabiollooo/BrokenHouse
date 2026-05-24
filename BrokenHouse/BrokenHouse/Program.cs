@@ -8,37 +8,18 @@ namespace BrokenHouse
     {
         static void Main(string[] args)
         {
-            string CharacterName;
             Player player;
             ReadToFile saveSystem = new ReadToFile();
 
+            player = CharacterCreation(saveSystem);
 
-            string filePath = @".\saves\save.json";
-            if (File.Exists(filePath) && new FileInfo(filePath).Length > 0)
-            {
-                Console.WriteLine("Character found !");
-                TypewriterEffect("Loading character...\n\n", 20);
-                System.Threading.Thread.Sleep(1000);
-                player = saveSystem.LoadPlayer();
-                CharacterName = player.Name;
-            }
-            else
-            {
-                Console.ResetColor();
-                Console.WriteLine("Enter your characters name:");
-                CharacterName = Console.ReadLine();
-                player = new Player(CharacterName, 0.0, 1, 200.00);
-                saveSystem.WriteToFile(player);
-                System.Threading.Thread.Sleep(2000);
-
-            }
-                                       // name, balance, current day, daily income
+            // name, balance, current day, daily income
             //Player player = new Player(CharacterName, 0.0, 1, 200.00);
             Family family = new Family();
             Game game = new Game();
             Home home = new Home();
 
-            ClearDisplay(player);
+            //ClearDisplay(player);
             
             while (true)
             {
@@ -72,8 +53,10 @@ namespace BrokenHouse
                         break;
 
                     case 4:
-                        TypewriterEffect("Restarting game", 40);
-                        //Restart game to default, overwrite the previous character
+                        ResetCharacter(player);
+                        ClearDisplay(player);
+                        CharacterCreation(saveSystem);
+                        //TypewriterEffect("Restarting game", 40);
                         break;
 
                     default:
@@ -85,6 +68,67 @@ namespace BrokenHouse
 
 
         }// End of Main method
+
+        static Player CharacterCreation(ReadToFile saveSystem)
+        {
+            string filePath = @".\saves\save.json";
+            Player player;
+
+            if (File.Exists(filePath) && new FileInfo(filePath).Length > 0)
+            {
+                Console.WriteLine("Character found !");
+                TypewriterEffect("Loading character...\n\n", 20);
+                System.Threading.Thread.Sleep(1000);
+                player = saveSystem.LoadPlayer();
+
+                ClearDisplay(player);
+            }
+            else
+            {
+                Console.ResetColor();
+                Console.WriteLine("Enter your characters name:");
+                string characterName = Console.ReadLine();
+                player = new Player(characterName, 0.0, 1, 200.00);
+                saveSystem.WriteToFile(player);
+                System.Threading.Thread.Sleep(2000);
+
+                ClearDisplay(player);
+            }
+            return player;
+        }
+
+        static void ResetCharacter(Player player)
+        {
+            string filePath = @".\saves\save.json";
+            Console.WriteLine("Are you sure that you wanna delete the character (Y/N) ?");
+            string PlayerDeleteChar = Console.ReadLine();
+
+            if (PlayerDeleteChar == "Y" || PlayerDeleteChar == "y")
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    Console.WriteLine("Character successfully deleted !\n");
+                    System.Threading.Thread.Sleep(2000);
+                    ClearDisplay(player);
+                }
+
+            }
+            else if (PlayerDeleteChar == "N" || PlayerDeleteChar == "n")
+            {
+                Console.WriteLine("Character deletion cancelled !\n");
+                System.Threading.Thread.Sleep(2000);
+                ClearDisplay(player);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input...");
+            }
+
+
+
+
+        }
 
 
         static void DisplayFamilyGreeting(Family family,  Player player)
@@ -108,11 +152,11 @@ namespace BrokenHouse
 
         public static void DisplayPlayerInfo(Player player)
         {
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("************************************\n");
                 Console.ResetColor();
                     Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
-                Console.ForegroundColor= ConsoleColor.DarkBlue;
+                Console.ForegroundColor= ConsoleColor.White;
                 Console.WriteLine("\n************************************\n");
             Console.ResetColor();
 
