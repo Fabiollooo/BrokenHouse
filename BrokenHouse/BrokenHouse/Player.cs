@@ -17,7 +17,7 @@ namespace BrokenHouse
         public Player(string name, double balance, int currentDay, double payCheck)
         {
             this.Name = name;
-            this.Balance = 200;
+            this.Balance = balance;
             this.CurrentDay = currentDay;
             this.Paycheck = payCheck;
 

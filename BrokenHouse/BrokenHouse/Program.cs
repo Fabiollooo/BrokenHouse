@@ -90,7 +90,7 @@ namespace BrokenHouse
                 Console.ResetColor();
                 Console.WriteLine("Enter your characters name:");
                 string characterName = Console.ReadLine();
-                player = new Player(characterName, 0.0, 1, 200.00);
+                player = new Player(characterName, 200.0, 1, 200.00);
                 saveSystem.WriteToFile(player);
                 System.Threading.Thread.Sleep(2000);
 
