@@ -16,7 +16,9 @@ namespace BrokenHouse
             string json = JsonSerializer.Serialize(player);
             File.WriteAllText(filePath, json);
             
-            Console.WriteLine("Player Saved !");
+            Console.WriteLine("Player Saved !\n");
+            System.Threading.Thread.Sleep(2000);
+            Program.ClearDisplay(player);
         }
 
         public Player LoadPlayer()

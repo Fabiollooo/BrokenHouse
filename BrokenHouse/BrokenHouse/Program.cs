@@ -157,14 +157,14 @@ namespace BrokenHouse
             Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("***************************************************************\n");
                 Console.ResetColor();
-                    Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.DailyIncome}");
+                    Console.WriteLine($"Name: {player.Name},  Balance: {player.Balance}, Day: {player.CurrentDay}, Daily Income: {player.Paycheck}");
                 Console.ForegroundColor= ConsoleColor.White;
                 Console.WriteLine("\n***************************************************************\n");
             Console.ResetColor();
 
         }
 
-        static void ClearDisplay(Player player) 
+        public static void ClearDisplay(Player player) 
         {
             Console.Clear();
             DisplayPlayerInfo(player);

@@ -9,17 +9,17 @@ namespace BrokenHouse
         public string Name { get; set; }
         public double Balance { get; set; }
         public int CurrentDay { get; set; }
-        public double DailyIncome { get; set; }
+        public double Paycheck { get; set; }
         public List<Items> Inventory { get; set; }
         public List<Expenses> Bills { get; set; }
 
 
-        public Player(string name, double balance, int currentDay, double dailyIncome)
+        public Player(string name, double balance, int currentDay, double payCheck)
         {
             this.Name = name;
-            this.Balance = balance;
+            this.Balance = 200;
             this.CurrentDay = currentDay;
-            this.DailyIncome = dailyIncome;
+            this.Paycheck = payCheck;
 
             this.Inventory = new List<Items>
             {

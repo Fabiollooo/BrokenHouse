@@ -77,9 +77,13 @@ namespace BrokenHouse
             Console.WriteLine("║    WELCOME TO BLACKJACK           ║");
             Console.WriteLine("╚═══════════════════════════════════╝\n");
             Console.ResetColor();
-            
 
-            int playerBet = 0;
+            double playerBet = 0;
+            bool playerWin = false;
+            PlaceBet(player, ref playerBet );
+            ClearDisplay(player);
+
+
             int playerCard1 = 0;
             int playerCard2 = 0;
             int dealerCard1 = 0;
@@ -87,12 +91,16 @@ namespace BrokenHouse
             int sumPlayerCards = 0;
             int sumDealerCards = 0;
             bool roundOver = false;
+            bool gameTied = false;
 
             bool playerPlays = true;
             while (playerPlays)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n>>> New Round Started <<<\n");
+                Console.WriteLine($"--- Current bet ({playerBet})  ---");
+
+
+                Console.WriteLine(">>> New Round Started <<<\n");
                 Console.ResetColor();
 
                 Random rand = new Random();
@@ -139,7 +147,7 @@ namespace BrokenHouse
                     Console.ResetColor();
                     string playerTurnChoice = Console.ReadLine();
 
-                    //Player hits 
+           
                     if (playerTurnChoice == "h" || playerTurnChoice == "H")
                     {
                         int newCard = rand.Next(1, 11);
@@ -153,13 +161,13 @@ namespace BrokenHouse
 
                         if(sumPlayerCards > 21)
                         {
-                            CheckBlackjackbust(sumPlayerCards, sumDealerCards, roundOver);
+                            CheckBlackjackbust(sumPlayerCards, sumDealerCards, roundOver, ref playerWin, ref gameTied);
                             PlayerHits = false;
                             roundOver = true;
                         }
                         else if (sumPlayerCards == 21)
                         {
-                            CheckBlackjackbust(sumPlayerCards, sumDealerCards, roundOver);
+                            CheckBlackjackbust(sumPlayerCards, sumDealerCards, roundOver, ref playerWin, ref gameTied);
                         }
 
                     }
@@ -178,7 +186,7 @@ namespace BrokenHouse
                         TypewriterEffect("\nPlayer stands.", 10);
                         TypewriterEffect("Dealer is checking cards...", 30);
                         System.Threading.Thread.Sleep(2000);
-                        CheckBlackjackbust(sumPlayerCards, sumDealerCards, roundOver);
+                        CheckBlackjackbust(sumPlayerCards, sumDealerCards, roundOver, ref playerWin, ref gameTied);
                     }
                     else
                     {
@@ -187,7 +195,10 @@ namespace BrokenHouse
 
                 }
 
+                BetReward(player, ref playerBet, ref playerWin, ref gameTied);
+
                 ////////////////////////////////////////////////////////////////////////////////////////
+
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -212,10 +223,12 @@ namespace BrokenHouse
                 }
             }
 
+            
         }//End of PlayBlackjack
 
-        static void CheckBlackjackbust(int sumPlayerCards,int sumDealerCards, bool roundOver)
-        {
+        static void CheckBlackjackbust(int sumPlayerCards,int sumDealerCards, bool roundOver, ref bool playerWin, /*ref bool game,*/ ref bool gameTied)
+        {    
+
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("═══════════════════════════════════");
@@ -230,12 +243,14 @@ namespace BrokenHouse
                     TypewriterEffect("\nPlayer busts! Dealer wins.");
                     Console.ResetColor();
                     roundOver = true;
+                    playerWin = false;
                 }
                 else if (sumPlayerCards == 21 && sumPlayerCards > sumDealerCards)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    TypewriterEffect("\nPlayer hit blackjack! Dealer wins.", 30);
+                    TypewriterEffect("\nPlayer hit blackjack! Player wins.", 30);
                     Console.ResetColor();
+                    playerWin = true;
                 }
                 else if (sumDealerCards > 21)
                 {
@@ -243,6 +258,7 @@ namespace BrokenHouse
                     TypewriterEffect("\nDealer busts! Player wins.", 30);
                     Console.ResetColor();
                     roundOver = true;
+                    playerWin = true;
                 }
                 else if (sumPlayerCards > sumDealerCards)
                 {
@@ -250,6 +266,7 @@ namespace BrokenHouse
                     TypewriterEffect("\nPlayer wins!", 30);
                     Console.ResetColor();
                     roundOver = true;
+                    playerWin = true;
                 }
                 else if (sumDealerCards > sumPlayerCards)
                 {
@@ -257,11 +274,14 @@ namespace BrokenHouse
                     TypewriterEffect("\nDealer wins!", 30);
                     Console.ResetColor();
                     roundOver = true;
+                    playerWin= false;
                 }
                 else
                 {
                     Console.WriteLine("It's a tie!");
                     roundOver = true;
+                    gameTied = true;
+                    //No one wins here add an acception !!!!!!!!
                 }
 
                 Console.WriteLine();
@@ -272,6 +292,53 @@ namespace BrokenHouse
                 Console.ResetColor();
             }
         }
+
+        static void PlaceBet(Player player, ref double playerBet)
+        {
+            TypewriterEffect("Please enter your bet value !", 20);
+            playerBet = int.Parse(Console.ReadLine());
+
+            while (true)
+            {
+                if(playerBet > player.Balance)
+                {
+                    TypewriterEffect("Insuficiant funds !", 20);
+                    TypewriterEffect("Broke boy !", 5);
+                    System.Threading.Thread.Sleep(2000);
+                    ClearDisplay(player);
+                    PlaceBet(player, ref playerBet);
+                }
+                else
+                {
+                    TypewriterEffect("Bet successful", 20);
+                    player.Balance -= playerBet;
+                    return;
+                }
+
+            }
+
+        }
+
+        static void BetReward(Player player,ref double playerBet, ref bool playerWin, ref bool gameTied)
+        {
+            if (playerWin == true)
+            {
+                player.Balance += (playerBet * 2);
+                TypewriterEffect($"Congrats you won {playerBet * 2} !", 20);
+            }
+            else if(gameTied == true)
+            {
+                TypewriterEffect($"Game Tied !, You won {playerBet}", 20);
+                player.Balance += playerBet;
+                gameTied = false;
+            }
+            else
+            {
+                TypewriterEffect($"Unlucky lil bro, you lost {playerBet} !", 20);
+
+            }
+        }
+
 
 
         static void ClearDisplay(Player player)
