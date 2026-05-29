@@ -233,6 +233,14 @@ namespace BrokenHouse
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("═══════════════════════════════════");
             Console.ResetColor();
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($" Your Hand:  {sumPlayerCards}");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($" Dealer Hand: {sumDealerCards}");
+            Console.ResetColor();
+
             //Bust Checker
             if (roundOver == false)
             {
@@ -284,12 +292,6 @@ namespace BrokenHouse
                     //No one wins here add an acception !!!!!!!!
                 }
 
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine($" Your Hand:  {sumPlayerCards}");
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine($" Dealer Hand: {sumDealerCards}");
-                Console.ResetColor();
             }
         }
 
@@ -346,6 +348,8 @@ namespace BrokenHouse
             Console.Clear();
             Program.DisplayPlayerInfo(player);
         }
+
+
         static void TypewriterEffect(string text, int delayMs = 50)
         {
             foreach (char c in text)

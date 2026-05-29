@@ -1,6 +1,8 @@
-﻿using System.Numerics;
-using System.IO;
+﻿using System.IO;
+using System.Numerics;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace BrokenHouse
 {
@@ -30,6 +32,7 @@ namespace BrokenHouse
                 Console.WriteLine("2 - Go Home");
                 Console.WriteLine("3 - Save game");
                 Console.WriteLine("4 - Restart game");
+                Console.WriteLine("5 - Close game");
                 Console.WriteLine("\n");
 
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -58,6 +61,16 @@ namespace BrokenHouse
                         ResetCharacter(player);
                         ClearDisplay(player);
                         CharacterCreation(saveSystem);
+                        //TypewriterEffect("Restarting game", 40);
+                        break;
+
+                    case 5:
+                        TypewriterEffect("Closing game...", 20);
+                        System.Threading.Thread.Sleep(2000);
+                        saveSystem.WriteToFile(player);
+                        Environment.Exit(0);
+
+
                         //TypewriterEffect("Restarting game", 40);
                         break;
 
