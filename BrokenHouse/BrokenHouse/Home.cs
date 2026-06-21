@@ -22,10 +22,18 @@ namespace BrokenHouse
                 Console.WriteLine("\n");
 
                 Console.ForegroundColor = ConsoleColor.Black;
-                int choice = int.Parse(Console.ReadLine());
+                string input = Console.ReadLine();
                 Console.ResetColor();
 
-                    switch (choice)
+                if (!int.TryParse(input, out int choice))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    System.Threading.Thread.Sleep(1000);
+                    ClearDisplay(player);
+                    continue;
+                }
+
+                switch (choice)
                     {
                         case 1:
                             ClearDisplay(player);
@@ -60,8 +68,10 @@ namespace BrokenHouse
 
                         default:
                             Console.WriteLine("Invalid input");
+                            System.Threading.Thread.Sleep(1000);
+                            ClearDisplay(player);
                             break;
-                    }
+                }
 
             }
 

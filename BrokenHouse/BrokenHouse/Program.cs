@@ -36,8 +36,17 @@ namespace BrokenHouse
                 Console.WriteLine("\n");
 
                 Console.ForegroundColor = ConsoleColor.Black;
-                int choice = int.Parse(Console.ReadLine());
+                string input = Console.ReadLine();
                 Console.ResetColor();
+
+                if(!int.TryParse(input, out int choice))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    System.Threading.Thread.Sleep(1000);
+                    ClearDisplay(player);
+                    continue;
+                }
+
                 switch(choice)
                 {
                     case 1:
@@ -80,6 +89,7 @@ namespace BrokenHouse
                         ClearDisplay(player);
                         break;
                 }
+                
             }
 
 

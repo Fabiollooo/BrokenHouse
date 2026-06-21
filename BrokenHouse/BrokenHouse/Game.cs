@@ -10,63 +10,77 @@ namespace BrokenHouse
         public void ChooseGame(Player player)
         {
             //Program.DisplayPlayerInfo(player);
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\n╔════════════════════════════════╗");
-            Console.WriteLine("║     CHOOSE A GAME TO PLAY      ║");
-            Console.WriteLine("╚════════════════════════════════╝\n");
-            Console.ResetColor();
-            
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("  1 - Blackjack ");
-            Console.WriteLine("  2 - Roulette ");
-            Console.WriteLine("  3 - Craps ");
-            Console.WriteLine("  4 - Higher or Lower ");
-            Console.ResetColor();
-
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("  0 - Go Back");
-            Console.ResetColor();
-            Console.WriteLine();
-            //Add more games later maybe
-
-
-            Console.ForegroundColor = ConsoleColor.Black;
-            int choice = int.Parse(Console.ReadLine());
-            Console.ResetColor();
-            switch (choice)
+            while (true)
             {
-                case 1:
-                    Console.WriteLine("Blackjack it is...");
-                    ClearDisplay(player);
-                    PlayBlackjack(player);
-                    break;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n╔════════════════════════════════╗");
+                Console.WriteLine("║     CHOOSE A GAME TO PLAY      ║");
+                Console.WriteLine("╚════════════════════════════════╝\n");
+                Console.ResetColor();
+            
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("  1 - Blackjack ");
+                Console.WriteLine("  2 - Roulette ");
+                Console.WriteLine("  3 - Craps ");
+                Console.WriteLine("  4 - Higher or Lower ");
+                Console.ResetColor();
 
-                case 2:
-                    Console.WriteLine("Roulette it is...");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("  0 - Go Back");
+                Console.ResetColor();
+                Console.WriteLine();
+                //Add more games later maybe
+
+
+                Console.ForegroundColor = ConsoleColor.Black;
+                string input = Console.ReadLine();
+                Console.ResetColor();
+
+                if (!int.TryParse(input, out int choice))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    System.Threading.Thread.Sleep(1000);
+                    ClearDisplay(player);
+                    continue;
+                }
+
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Blackjack it is...");
+                        ClearDisplay(player);
+                        PlayBlackjack(player);
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Roulette it is...");
                     
-                    break;
+                        break;
 
-                case 3:
-                    Console.WriteLine("Craps it is...");
-                    ClearDisplay(player);
-                    PlayCraps(player);
+                    case 3:
+                        Console.WriteLine("Craps it is...");
+                        ClearDisplay(player);
+                        PlayCraps(player);
 
-                    break;
+                        break;
 
-                case 4:
-                    Console.WriteLine("Higer or Lower it is...");
+                    case 4:
+                        Console.WriteLine("Higer or Lower it is...");
 
-                    break;
+                        break;
 
-                case 0:
-                    Console.WriteLine("Exiting the casino.");
-                    ClearDisplay(player);
-                    return;
+                    case 0:
+                        Console.WriteLine("Exiting the casino.");
+                        ClearDisplay(player);
+                        return;
 
-                default:
-                    Console.WriteLine("Invalid input");
-                    break;
+                    default:
+                        Console.WriteLine("Invalid input");
+                        System.Threading.Thread.Sleep(1000);
+                        ClearDisplay(player);
+                        break;
+                }
             }
         }//end of ChooseGame
 
