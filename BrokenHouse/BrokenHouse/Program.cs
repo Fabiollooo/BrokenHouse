@@ -76,6 +76,8 @@ namespace BrokenHouse
 
                     default:
                         Console.WriteLine("Invalid input");
+                        System.Threading.Thread.Sleep(1000);
+                        ClearDisplay(player);
                         break;
                 }
             }

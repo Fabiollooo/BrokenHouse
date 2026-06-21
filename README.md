@@ -15,14 +15,14 @@ Win big and your family lives comfortably. **Lose it all and watch them slowly f
 
 The game is split into two phases that repeat each in-game day:
 
-### 🃏 The Casino — Gambling Phase
+###  The Casino — Gambling Phase
 Head to the casino as your job doesn't pay enough, to earn money for the day. You choose how much to wager and which games to play. Luck and risk management are everything here. Walk away with enough and your family survives another night. Walk away with nothing and the consequences start stacking up.
 
 - Manage your wager carefully — going all-in is tempting but dangerous
 - Different games carry different odds and risk levels
 - The more desperate your situation, the more pressure there is to gamble bigger
 
-### 🏠 The Home — Family Management Phase
+###  The Home — Family Management Phase
 At the end of each day, you must tend to your family's needs. Basic survival costs money, and neglect compounds fast.
 
 Resources you must manage:
@@ -83,4 +83,4 @@ The family management mechanic is inspired by the end-of-day resource loop in *P
 
 ## Status
 
-> 🚧 In development
+>  In development

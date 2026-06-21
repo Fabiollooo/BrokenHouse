@@ -1,33 +1,32 @@
-✅ Sprint 0 — Project Setup
+✅ Sprint 0 — Project Setup (DONE)
 
 Get the basics in place before writing any game logic. (DONE)
- -Create a new C# Console App project in Visual Studio
- -Name the solution BrokenHouse
- -Set up GitHub repo with a Visual Studio .gitignore
- -Push your empty project to GitHub
- -Add README.md to the repo
+ -Create a new C# Console App project in Visual Studio (DONE)
+ -Name the solution BrokenHouse (DONE)
+ -Set up GitHub repo with a Visual Studio .gitignore (DONE)
+ -Push your empty project to GitHub (DONE)
+ -Add README.md to the repo (DONE)
  
 
 
-✅ Sprint 1 — Core Game Loop
+✅ Sprint 1 — Core Game Loop (DONE)
 
 The skeleton of the game. No gambling, no family yet — just the loop.
- -Create a Game.cs class that holds the main game loop
- -Build a basic day counter (Day 1, Day 2, Day 3...)
- -Create a simple main menu: [1] Go to Casino  [2] Go Home  [3] Quit
- -Make each menu option print a placeholder message (e.g. "You head to the casino...")
- -Add a player object with a starting balance (e.g. $200)
- -Display the player's balance at the start of each day
- -Add a way to end the game (quit option or day limit)
+ -Create a Game.cs class that holds the main game loop (DONE)
+ -Build a basic day counter (Day 1, Day 2, Day 3...) (DONE)
+ -Create a simple main menu: [1] Go to Casino  [2] Go Home  [3] Quit (DONE)
+ -Make each menu option print a placeholder message (e.g. "You head to the casino...") (DONE)
+ -Add a player object with a starting balance (e.g. $200) (DONE)
+ -Display the player's balance at the start of each day (DONE)
+ -Add a way to end the game (quit option or day limit) (DONE)
 
 
 ✅ Sprint 2 — Family Needs System
 
-Build the home side of the game before the gambling side.
- -Create a Family.cs class
- -Add basic needs: Food, Medicine, Heat — each as a number (e.g. 0–100)
- -Every day, each need decreases by a set amount (e.g. Food -20 per day)
- -Build a "Go Home" screen that shows current need levels
+ -Create a Family.cs class (DONE)
+ -Add basic needs: Food, Medicine, Heat — each as a number (e.g. 0–100) (DONE)
+ -Every day, each need decreases by a set amount (e.g. Food -20 per day) 
+ -Build a "Go Home" screen that shows current need levels (DONE)
  -Add a shop — player can spend money to refill needs
 
  -Food costs $20 to refill
@@ -40,56 +39,50 @@ Build the home side of the game before the gambling side.
  -Display Game Over screen with how many days you survived
 
 
-✅ Sprint 3 — First Gambling Game (Coin Flip)
+✅ Sprint 3 — Blackjack
 
 Start with the simplest possible gambling mechanic to get the casino side working.
- Create a Casino.cs class
- Build a Coin Flip game:
-	 Player chooses how much to bet
-	 50/50 chance to win or lose the bet
-	 Print result and update player balance
+ Create a Game.cs class
+ Build a BlackJack method containing the game logic:
+	 -You place your bet. (DONE)
+	 -Reviece your cards. (DONE)
+	 -Dealer reveals one card. (DONE)
+	 -Player chose to hit/stands. (DONE)
+	 -Later implementation can add splitting, doubling down, etc. (optional)
 
 
- Prevent the player from betting more than they have
- After gambling, player returns to the main day menu
- Make sure a broke player (balance = $0) still has to go home and face consequences
+ Prevent the player from betting more than they have (DONE)
+ After gambling, player returns to the main day menu (DONE)
+ Make sure a broke player (balance = $0) still has to go home and face consequences (DONE)
 
 
-✅ Sprint 4 — Second Gambling Game (Dice Roll)
-
-Add a second game to give the casino some variety.
- Build a Dice Roll game in Casino.cs:
-	 Player bets on whether the dice total will be High (8–12) or Low (2–6)
-	 Roll two dice (random 1–6 each)
-	 High/Low each pay 1.8x the bet (slightly worse than 50/50 to simulate house edge)
-	 7 is a neutral result — player gets their bet back
-
-
- Add a casino menu: [1] Coin Flip  [2] Dice Roll  [3] Leave Casino
- Show win/loss history for the current day session
-
-
-✅ Sprint 5 — Steady Job Income
-
-Give the player a small reliable income so the game isn't purely luck-dependent.
- Add a Job.cs class or logic inside Game.cs
- Player automatically earns a small wage each day (e.g. $50/day)
- Display income earned at the start of each day
- Make sure the wage alone is not enough to cover all family needs (forces gambling)
- Add a note in the UI that hints the player needs more than just their wage
-
-
-✅ Sprint 6 — Family Members & Health
+✅ Sprint 4 — Family Members & Health
 
 Make the family feel real by adding individual members.
- Create a FamilyMember.cs class with: Name, Health, IsAlive, IsSick
- Add 2–3 family members (e.g. Spouse, Child)
- Each member has their own health bar (0–100)
- Random chance each day that a member gets sick
- If sick and no medicine is bought, health drops faster
- If health hits 0, that member dies — print a somber message
- If all family members die, trigger Game Over
- Display each family member's status on the "Go Home" screen
+	-Create a FamilyMember.cs class with: Name, Health, IsAlive, IsSick (DONE)
+	-Add 2–3 family members (e.g. Spouse, Child) (DONE)
+	-Each member has their own health bar (0–100) (DONE)
+	-Random chance each day that a member gets sick
+	-If sick and no medicine is bought, health drops faster
+	-If health hits 0, that member dies — print a somber message
+	-If all family members die, trigger Game Over
+	-Display each family member's status on the "Go Home" screen
+	-Later implementation, add bigger families for a bigger challenge (optional).
+
+✅ Sprint 5 — Second Gambling Game
+
+Add a second game to give the casino some variety.
+	-Roulette.
+	-Craps.
+	-High/Low card game.
+	-Possible other games.
+
+
+
+✅ Sprint 6 — Steady Job Income
+
+Give the player a small reliable income so the game isn't purely luck-dependent.
+	-Implement some sort of way that the income is added weekly or bi-daily.
 
 
 ✅ Sprint 7 — Random Events
