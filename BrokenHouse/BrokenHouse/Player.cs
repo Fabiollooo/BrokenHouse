@@ -10,7 +10,13 @@ namespace BrokenHouse
         public double Balance { get; set; }
         public int CurrentDay { get; set; }
         public double Paycheck { get; set; }
-        public List<Items> Inventory { get; set; }
+
+        
+        public int FoodQuantity { get; set; }
+        public double FoodPrice { get; set; }
+        public int MedicineQuantity { get; set; }
+        public double MedicinePrice { get; set; }
+
         public List<Expenses> Bills { get; set; }
 
 
@@ -21,15 +27,14 @@ namespace BrokenHouse
             this.CurrentDay = currentDay;
             this.Paycheck = payCheck;
 
-            this.Inventory = new List<Items>
-            {
-                new Items("Food", 50.0, 1),
-                new Items("Medicine", 100.0, 1)
-            };
+            this.FoodQuantity = 1;
+            this.FoodPrice = 20.0;
+            this.MedicineQuantity = 1;
+            this.MedicinePrice = 40.0;
 
             this.Bills = new List<Expenses>
             {
-                new Expenses("Rent", 500.0, false),
+                new Expenses("Rent", 180.0, false),
                 //new Expenses("Utilities", 100.0, false)
             };
         }

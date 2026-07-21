@@ -23,6 +23,7 @@ namespace BrokenHouse
                 Console.WriteLine("  2 - Roulette ");
                 Console.WriteLine("  3 - Craps ");
                 Console.WriteLine("  4 - Higher or Lower ");
+                Console.WriteLine("  5 - Pick the Treasure ");
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.Gray;
@@ -70,6 +71,11 @@ namespace BrokenHouse
 
                         break;
 
+                    case 5:
+                        Console.WriteLine("Pick the Treasure...");
+
+                        break;
+
                     case 0:
                         Console.WriteLine("Exiting the casino.");
                         ClearDisplay(player);
@@ -96,6 +102,8 @@ namespace BrokenHouse
 
             double playerBet = 0;
             bool playerWin = false;
+            bool gameTied = false;
+
             PlaceBet(player, ref playerBet );
             ClearDisplay(player);
 
@@ -107,7 +115,6 @@ namespace BrokenHouse
             int sumPlayerCards = 0;
             int sumDealerCards = 0;
             bool roundOver = false;
-            bool gameTied = false;
 
             bool playerPlays = true;
             while (playerPlays)
@@ -211,7 +218,20 @@ namespace BrokenHouse
 
                 }
 
-                BetReward(player, ref playerBet, ref playerWin, ref gameTied);
+                int outcome;
+                if (gameTied)
+                {
+                    outcome = 0;
+                }
+                else if (playerWin)
+                {
+                    outcome = 2;
+                }
+                else
+                {
+                    outcome = -1;
+                }
+                BetReward(player, playerBet, outcome);
 
                 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -314,9 +334,12 @@ namespace BrokenHouse
 
         static void PlayCraps(Player player)
         {
-            
             TypewriterEffect("Welcome to Craps !", 20);
-            //Select bet
+
+            double playerBet = 0;
+            PlaceBet(player, ref playerBet);
+            bool playerWin = false;
+            bool gameTied = false;
 
             int PlayerDice1 = 0;
             int PlayerDice2 = 0;
@@ -348,7 +371,7 @@ namespace BrokenHouse
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Congrats the Player wins\n");
                     Console.ResetColor();
-                    //Add bet reward here
+                    playerWin = true;
 
                     System.Threading.Thread.Sleep(2000);
                     ClearDisplay(player);
@@ -358,6 +381,7 @@ namespace BrokenHouse
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Dealer wins...\n");
                     Console.ResetColor();
+                    playerWin = false;
                     System.Threading.Thread.Sleep(2000);
                     ClearDisplay(player);
                 }
@@ -392,10 +416,11 @@ namespace BrokenHouse
                                 Console.WriteLine("Dealer wins !");
                                 Console.WriteLine("--------------------\n");
                                 Console.ResetColor();
-                                
+
                                 System.Threading.Thread.Sleep(1000);
                                 ClearDisplay(player);
                                 PlayerPointRoll = false;
+                                playerWin = false;
                                 //return;
                             }
                             else if (PlayerPointSum == PlayerDiceSum)
@@ -407,6 +432,7 @@ namespace BrokenHouse
                                 Console.ResetColor();
                                 System.Threading.Thread.Sleep(1000);
                                 ClearDisplay(player);
+                                playerWin = true;
 
                                 PlayerPointRoll = false;
                                 //return;
@@ -428,52 +454,66 @@ namespace BrokenHouse
                 }
             }
 
-
-        }
-
-        static void PlaceBet(Player player, ref double playerBet)
-        {
-            TypewriterEffect("Please enter your bet value !", 20);
-            playerBet = int.Parse(Console.ReadLine());
-
-            while (true)
+            int outcome;
+            if (gameTied)
             {
-                if(playerBet > player.Balance)
-                {
-                    TypewriterEffect("Insuficiant funds !", 20);
-                    TypewriterEffect("Broke boy !", 5);
-                    System.Threading.Thread.Sleep(2000);
-                    ClearDisplay(player);
-                    PlaceBet(player, ref playerBet);
-                }
-                else
-                {
-                    TypewriterEffect("Bet successful", 20);
-                    player.Balance -= playerBet;
-                    return;
-                }
-
+                outcome = 0;
             }
-
-        }
-
-        static void BetReward(Player player,ref double playerBet, ref bool playerWin, ref bool gameTied)
-        {
-            if (playerWin == true)
+            else if (playerWin)
             {
-                player.Balance += (playerBet * 2);
-                TypewriterEffect($"Congrats you won {playerBet * 2} !", 20);
-            }
-            else if(gameTied == true)
-            {
-                TypewriterEffect($"Game Tied !, You won {playerBet}", 20);
-                player.Balance += playerBet;
-                gameTied = false;
+                outcome = 2;
             }
             else
             {
-                TypewriterEffect($"Unlucky lil bro, you lost {playerBet} !", 20);
+                outcome = -1;
+            }
 
+            BetReward(player, playerBet, outcome);
+        }
+
+        static void PlaceBet(Player player, ref double bet)
+        {
+            TypewriterEffect("Please enter your bet value !", 20);
+
+            if (!double.TryParse(Console.ReadLine(), out bet) || bet <= 0)
+            {
+                TypewriterEffect("Invalid bet amount !", 20);
+                System.Threading.Thread.Sleep(1000);
+                ClearDisplay(player);
+                PlaceBet(player, ref bet);
+                return;
+            }
+
+            if (bet > player.Balance)
+            {
+                TypewriterEffect("Insuficiant funds !", 20);
+                TypewriterEffect("Broke boy !", 5);
+                System.Threading.Thread.Sleep(2000);
+                ClearDisplay(player);
+                PlaceBet(player, ref bet);
+                return;
+            }
+
+            TypewriterEffect("Bet successful", 20);
+            player.Balance -= bet;
+        }
+
+        static void BetReward(Player player, double bet, int outcomeMultiplier)
+        {
+            if (outcomeMultiplier > 0)
+            {
+                double winnings = bet * outcomeMultiplier;
+                player.Balance += winnings;
+                TypewriterEffect($"Congrats you won {winnings} !", 20);
+            }
+            else if (outcomeMultiplier == 0)
+            {
+                TypewriterEffect($"Game Tied !, You got your {bet} back", 20);
+                player.Balance += bet;
+            }
+            else
+            {
+                TypewriterEffect($"Unlucky lil bro, you lost {bet} !", 20);
             }
         }
 
